@@ -13,13 +13,13 @@ export class RegistrarClienteComponent {
   clienteArray :IClienteResponse[]=[];
  constructor(private clienteService:ClienteService){}
  ngOnInit():void{
-  this.getcliente();
+  // this.getcliente();
  
-  getcliente() : void{
-   this.clienteService.getcliente().subscribe((result:any)=>{
-    console.log('Result',result);
-    this.clienteArray=result;
-    console.log(this.clienteArray);
-   });
+  // getcliente() : void{
+  //  this.clienteService.getcliente().subscribe((result:any)=>{
+    // console.log('Result',result);
+    // this.clienteArray=result;
+    // console.log(this.clienteArray);
+  //  });
   }
 }
