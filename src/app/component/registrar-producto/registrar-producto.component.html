@@ -1,0 +1,180 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" style="color:blue">SIGVIT</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Iniciar Sesion</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Producto</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Producto
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Comprar Producto</a></li>
+            <li><a class="dropdown-item" href="#">Registar Producto</a></li>
+            <!--li><hr class="dropdown-divider"></li-->
+            <!--li><a class="dropdown-item" href="#">Something else here</a></li-->
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <!--form class="d-flex" role="search" >
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form-->
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <div class="row"><!--Producto-Cabecera-->
+    <h1>{{title}}</h1>
+    <div class="card">
+      <!--Los-Campos-De-Rellenado-Para-Agregar-Producto-->
+      <div class="card-body"> </div>
+      <form class="form-group g-4 needs-validation" [formGroup]="productoForm">
+        
+        <div class="row mb-2">
+          <label for="imputDescProducto" class="col-sm-2 col-form-label">Descripcion del Producto:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="imputDescProducto" placeholder="Consigne la Descripcion del Producto" formControlName="descripcion">
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <label for="imputNomProducto" class="col-sm-2 col-form-label">Nombre del Producto:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="imputNomProducto" placeholder="Consigne Nombre del Producto" formControlName="nombre">
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <label for="imputPrecioVenta" class="col-sm-2 col-form-label">Precio de Venta:</label>
+          <div class="col-sm-2">
+            <input type="number" class="form-control" id="imputPrecioVenta" placeholder="Consigne el precio de venta del producto" formControlName="precioVenta">
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <label for="imputPrecioCompra" class="col-sm-2 col-form-label">Precio de Compra:</label>
+          <div class="col-sm-2">
+            <input type="number" class="form-control" id="imputPrecioCompra" placeholder="Consigne el precio de compra del producto" formControlName="precioCompra">
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <label for="imputStock" class="col-sm-2 col-form-label">Stock:</label>
+          <div class="col-sm-2">
+            <input type="number" class="form-control" id="imputStock" placeholder="Consigne el stock del producto" formControlName="stock">
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <label for="imputIdCategoria" class="col-sm-2 col-form-label">IdCategoria: <br>(Vino-1, Pisco-2)</label>
+          <div class="col-sm-4">
+            <input type="number" class="form-control" id="imputIdCategoria" placeholder="Consigne la Categoria del Producto (Vino-1 , Pisco-2)" formControlName="idCategoria">
+          </div>
+        </div>
+        
+        <div class="row mb-2">
+          <label for="imputRucProveedor" class="col-sm-2 col-form-label">Ruc del Proveedor:</label>
+          <div class="col-sm-4">
+            <input type="number" class="form-control" id="imputRucProveedor" placeholder="Consigne el Ruc del Proveedor" formControlName="rucProveedor">
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <label for="imputImagen" class="col-sm-2 col-form-label">Link de la imagen:</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="imputImagen" placeholder="Consigne el Link de la imagen del Producto" formControlName="imagen">
+          </div>
+        </div>
+
+        <div class="row m-2 col-sm-1">
+          <button type="submit" class="btn btn-primary"
+          (click)="registrarProducto()"
+          >Registrar</button>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+  
+  <div class="row"><!--Producto-Detalle-->
+    <div class="card">
+      <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">NombreProducto</th>
+                    <th scope="col">PrecioVenta</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">categoriaNombre</th>
+                    <th scope="col">CategoriaDescripcion</th>
+                    <th scope="col">Proveedor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let producto of productoArray | paginate: {itemsPerPage:10, currentPage:page}; let i=index">
+                  <td>{{producto.idProducto}}</td>
+                  <td><img [src]="producto.imagen" alt="Imagen del Producto" style="width: 100px; height: auto;"></td>
+                  <td>{{producto.descripcion}}</td>
+                  <td>{{producto.nombre}}</td>
+                  <td>{{producto.precioVenta}}</td>
+                  <td>{{producto.stock}}</td>
+                  <td>{{producto.categoriaNombre}}</td>
+                  <td>{{producto.categoriaDescripcion}}</td>
+                  <td>{{producto.nombreProveedor}}</td>
+                  <td>
+                    <button class="btn btn-secundary rounded.circle p-2 lh-1"
+                    (click)="editarProducto(producto)"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" 
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="fa-solid fa-pen-to-square"
+                      viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"/></svg>               </button>
+                </td>
+                  <td>
+                    <button class="btn btn-secundary rounded.circle p-2 lh-1"
+                    (click)="eliminarProducto(producto)"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" 
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="fa-solid fa-trash-can"
+                      viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0L284.2 0c12.1 0 23.2 6.8 28.6 17.7L320 32l96 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 96C14.3 96 0 81.7 0 64S14.3 32 32 32l96 0 7.2-14.3zM32 128l384 0 0 320c0 35.3-28.7 64-64 64L96 512c-35.3 0-64-28.7-64-64l0-320zm96 64c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16l0 224c0 8.8 7.2 16 16 16s16-7.2 16-16l0-224c0-8.8-7.2-16-16-16z"/></svg>
+                </button>
+                </td>
+                
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls 
+              (pageChange)="page = $event"
+              previousLabel="Anterior"
+              nextLabel="Siguiente"
+            >
+
+            </pagination-controls>
+          </div>
+      </div>
+    </div>
+  
+  </div>
+</div>
+
